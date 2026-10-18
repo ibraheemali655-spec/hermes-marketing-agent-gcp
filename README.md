@@ -3,12 +3,16 @@
 An autonomous marketing agent that ran a 10-week LinkedIn campaign for a client. It
 researches, writes, schedules posts in a real logged-in browser, and reports to its owner on
 Telegram. It runs on a GCP VM that **sleeps when idle and wakes for its schedule**: no missed
-posts, for about $11 a month instead of $148.
+posts, for about $13 a month instead of $148.
 
 The agent is [Hermes](https://github.com/NousResearch/hermes-agent) (Nous Research). This
 repository is the deployment and the operating model around it: the infrastructure scripts
 from production (sanitized), the campaign skill and cron jobs, and a simulation you can run
 that shows why it's built this way.
+
+![The VM waking for a Telegram message, then shutting itself down](docs/img/wake-demo.gif)
+
+**[Watch the 10-second clip](https://github.com/ibraheemali655-spec/hermes-marketing-agent-gcp/releases/download/v1.0/hermes-wake-demo.mp4)**: a stopped VM, a Telegram message, the agent at work, then an idle hour and a shutdown, all recorded on the production setup.
 
 ![Architecture](docs/img/architecture.svg)
 
@@ -35,7 +39,7 @@ model's work is paid once per change; the cheap model's work recurs.
 - A Telegram message hits a scale-to-zero Cloud Run *waker*, which starts the VM.
 - **Cloud Scheduler** starts it 8 minutes before the next cron job. The schedule is computed
   from Hermes's own job store, so jobs added later from Telegram are covered automatically.
-- An idle watchdog stops it after 30 minutes, re-pointing the Scheduler and re-arming the
+- An idle watchdog stops it after an hour idle, re-pointing the Scheduler and re-arming the
   Telegram webhook on the way down.
 
 **A full browser, kept private** ([docs/security.md](docs/security.md)). A logged-in
@@ -66,7 +70,7 @@ Across 200 seeds, the desktop misses 3.2 of 30 on average (worst case 8). GCP mi
 | Infrastructure per month | VM hours | Total |
 |---|---:|---:|
 | Same VM, always on | 730 | $147.86 |
-| Wake-on-demand (awake 3.3% of the time) | 24 | **$10.73** |
+| Wake-on-demand (awake 5.3% of the time) | 38 | **$13.47** |
 
 | Model, same token profile | $/month | |
 |---|---:|---:|

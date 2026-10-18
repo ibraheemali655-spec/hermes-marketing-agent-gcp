@@ -73,6 +73,6 @@ systemctl is-active idle-watchdog.timer sync-next-wake.path
 '
 echo "==========================================================================="
 echo "Power management installed on $VM_NAME."
-echo "  idle-watchdog.timer  every 5 min; stops the VM after 30 min idle"
+echo "  idle-watchdog.timer  every 5 min; stops the VM after 60 min idle"
 echo "  sync-next-wake.path  rewrites Cloud Scheduler when ~/.hermes/cron/jobs.json changes"
 echo "==========================================================================="

@@ -21,7 +21,7 @@ from zoneinfo import ZoneInfo
 TZ = ZoneInfo("Africa/Cairo")
 GRACE = timedelta(hours=2)          # Hermes cron grace (grace=7200s in agent.log)
 WAKE_LEAD = timedelta(minutes=8)    # infra/config.example.sh WAKE_LEAD_MIN
-IDLE_MIN = 30                       # infra/vm/idle-watchdog.sh IDLE_THRESHOLD_MIN
+IDLE_MIN = 60                       # infra/vm/idle-watchdog.sh IDLE_THRESHOLD_MIN
 WATCHDOG_EVERY = 5                  # idle-watchdog.timer OnUnitActiveSec
 WATCHDOG_FIRST = 10                 # idle-watchdog.timer OnBootSec
 

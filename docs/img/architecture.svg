@@ -54,7 +54,7 @@
 
   <rect x="580" y="272" width="164" height="50" rx="7" fill="#ffffff" stroke="#F68E1E"/>
   <text x="662" y="293" text-anchor="middle" font-weight="600" fill="#333333">idle-watchdog</text>
-  <text x="662" y="311" text-anchor="middle" fill="#4d4d4d">30 min idle → stop</text>
+  <text x="662" y="311" text-anchor="middle" fill="#4d4d4d">60 min idle → stop</text>
 
   <rect x="756" y="272" width="164" height="50" rx="7" fill="#ffffff" stroke="#F68E1E"/>
   <text x="838" y="293" text-anchor="middle" font-weight="600" fill="#333333">sync-next-wake</text>

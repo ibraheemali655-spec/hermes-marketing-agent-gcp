@@ -10,12 +10,12 @@ agent loses nothing in the move. Running it 24/7 would cost about **$148/month**
 
 Wake-on-demand pays for the disk all month and for compute only while awake. Replaying the
 campaign (three scheduled posts a week plus about four Telegram conversations a week), the
-VM is awake **3.3%** of the time:
+VM is awake **5.3%** of the time:
 
 | | VM hours/month | Compute | Disk | Total |
 |---|---:|---:|---:|---:|
 | Always on | 730 | $141.86 | $6.00 | **$147.86** |
-| Wake-on-demand | 24 | $4.73 | $6.00 | **$10.73** |
+| Wake-on-demand | 38 | $7.47 | $6.00 | **$13.47** |
 
 The waker, the Scheduler job and the secret fit in GCP's free tiers. Each extra awake hour
 costs about $0.19, so heavier interactive use moves the total, but not the order of

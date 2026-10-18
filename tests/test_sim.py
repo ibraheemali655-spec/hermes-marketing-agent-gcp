@@ -29,11 +29,11 @@ def test_hermes_grace_semantics(up, expected):
     assert fires(t(9), up) is expected
 
 
-def test_watchdog_stops_30_to_35_minutes_after_activity():
+def test_watchdog_stops_one_threshold_to_one_tick_after_activity():
     booted = t(8, 52)
     for end in (t(9, 3), t(9, 10), t(10, 41)):
         idle = idle_shutdown(end, booted) - end
-        assert timedelta(minutes=30) <= idle <= timedelta(minutes=35)
+        assert timedelta(minutes=sim.IDLE_MIN) <= idle <= timedelta(minutes=sim.IDLE_MIN + sim.WATCHDOG_EVERY)
 
 
 def test_replay_is_deterministic():

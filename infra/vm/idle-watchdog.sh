@@ -3,19 +3,19 @@ set -euo pipefail
 
 # ============================================================================
 # idle-watchdog.sh — runs ON hermes-vm every 5 min via systemd timer.
-# If the VM has been idle for 30 min, sync the scheduler, re-arm the
+# If the VM has been idle for 60 min, sync the scheduler, re-arm the
 # Telegram webhook, and shut down.
 #
 # Idle = all of:
 #   - no login sessions (who)
 #   - no active CRD client session
 #   - no Hermes cron job running (no .tick.lock held)
-#   - no Hermes session modified in last 30 min
+#   - no Hermes session modified in last 60 min
 #
 # See docs/architecture.md.
 # ============================================================================
 
-IDLE_THRESHOLD_MIN=30
+IDLE_THRESHOLD_MIN=60
 MARKER_FILE="/tmp/hermes-idle-since"
 STATE_DIR="$HOME/.hermes"
 

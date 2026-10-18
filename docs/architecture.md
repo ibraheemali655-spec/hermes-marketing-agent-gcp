@@ -31,7 +31,7 @@ endpoint `WAKE_LEAD_MIN` (8) minutes before the next job. Its schedule isn't har
 `idle-watchdog.timer` runs `infra/vm/idle-watchdog.sh` every 5 minutes (first tick 10 minutes
 after boot). The VM counts as idle when there are no login sessions, no remote-desktop
 client, no cron job holding Hermes's `.tick.lock`, and no Hermes session file written in the
-last 30 minutes. After 30 idle minutes the watchdog:
+last 60 minutes. After 60 idle minutes the watchdog:
 
 1. runs `sync-next-wake.sh` (Scheduler → next job),
 2. points the Telegram webhook back at the waker,
@@ -62,7 +62,7 @@ on both hosts to show the difference.
 | `infra/waker/` | Cloud Run | `/telegram`, `/wake`, `/health` |
 | `infra/setup-scheduler.sh` | operator | creates `hermes-next-wake` |
 | `infra/install-vm-units.sh` | operator | copies `vm/*` and installs `units/*` on the VM |
-| `infra/vm/idle-watchdog.sh` | VM | 30 min idle → re-point Scheduler, re-arm webhook, stop |
+| `infra/vm/idle-watchdog.sh` | VM | 60 min idle → re-point Scheduler, re-arm webhook, stop |
 | `infra/vm/nextwake.py`, `sync-next-wake.sh` | VM | jobs.json → Scheduler expression |
 | `infra/start.sh`, `stop.sh` | operator | manual start, or a graceful stop that re-arms both triggers |
 
