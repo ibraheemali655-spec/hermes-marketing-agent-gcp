@@ -1,0 +1,49 @@
+# Excerpt of ~/.hermes/config.yaml as it runs in production: model routing and
+# the browser. Credentials are not here. Hermes reads them from ~/.hermes/.env
+# (OPENROUTER_API_KEY, TELEGRAM_BOT_TOKEN, ...), which never leaves the VM.
+
+# Implementer model: DeepSeek V4 Flash through OpenRouter. It won a five-model bake-off
+# on the actual CMO tasks (content, market reasoning, tool calling); see docs/cost.md.
+model:
+  default: deepseek/deepseek-v4-flash
+  provider: openrouter
+
+# Used only when the primary fails or is rate-limited.
+fallback_providers:
+- provider: openrouter
+  model: openrouter/owl-alpha        # free tier, fine for non-urgent overflow
+- provider: google
+  model: gemini-3.5-flash
+
+# Side tasks go to the cheapest model that can do them.
+auxiliary:
+  vision:                            # reading screenshots of pages the DOM tree can't describe
+    provider: google
+    model: gemini-3.1-flash-lite
+  web_extract:
+    provider: google
+    model: gemini-3.1-flash-lite
+
+# Sub-agents the implementer spawns for parallel research.
+delegation:
+  model: glm-5.1
+  provider: zai
+  max_concurrent_children: 3
+  max_spawn_depth: 1                 # sub-agents can't spawn sub-agents
+
+agent:
+  max_turns: 90
+
+# The agent drives a real, logged-in Chrome. The browser runs as a systemd service on the
+# VM (infra/startup.sh), and CDP is bound to loopback only. Nothing outside the VM can reach it.
+browser:
+  cdp_url: http://127.0.0.1:9222
+  allow_private_urls: false          # the agent can't be steered at internal endpoints
+  record_sessions: false
+  dialog_policy: must_respond
+
+# The same browser, exposed as structured tools (DOM, screenshots, network) over MCP.
+mcp_servers:
+  chrome_devtools:
+    command: npx
+    args: ["-y", "chrome-devtools-mcp@latest", "--browserUrl", "http://127.0.0.1:9222"]

@@ -1,0 +1,19 @@
+[Unit]
+# Guarantees the Telegram webhook is pointed at the waker whenever the VM goes
+# DOWN — by any path (idle-watchdog, stop.sh, console stop, reboot). Pairs with
+# hermes-webhook-release.service, which deletes the webhook on boot so the awake
+# gateway can long-poll. ExecStop runs while the network is still up (this unit
+# stops before network-online during shutdown).
+Description=Arm Telegram webhook to the waker on shutdown
+After=network-online.target hermes-webhook-release.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=__VM_USER__
+ExecStart=/bin/true
+ExecStop=/bin/bash -lc 'set -a; . "$HOME/.hermes-waker-url" 2>/dev/null; set +a; T=$(grep -oP "(?<=TELEGRAM_BOT_TOKEN=).+" "$HOME/.hermes/.env" | tr -d "\r\n"); [ -n "$T" ] && [ -n "$WAKER_URL" ] && curl -fsS "https://api.telegram.org/bot$T/setWebhook" -d "url=$WAKER_URL/telegram" -d "secret_token=$WEBHOOK_SECRET" >/dev/null && logger "hermes-webhook-arm: webhook armed to waker"'
+
+[Install]
+WantedBy=multi-user.target

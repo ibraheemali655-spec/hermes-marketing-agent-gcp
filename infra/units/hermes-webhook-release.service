@@ -1,0 +1,15 @@
+[Unit]
+# Post-cutover: when the VM is awake the Hermes gateway long-polls Telegram, so
+# any webhook left set by the idle-watchdog (pointing at the waker) must be
+# released on boot — otherwise getUpdates returns 409 and Hermes goes deaf.
+Description=Release Telegram webhook so the Hermes gateway can long-poll
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=__VM_USER__
+ExecStart=/bin/bash -lc 'T=$(grep -oP "(?<=TELEGRAM_BOT_TOKEN=).+" "$HOME/.hermes/.env" | tr -d "\r\n"); [ -n "$T" ] && curl -fsS "https://api.telegram.org/bot$T/deleteWebhook" -d drop_pending_updates=false >/dev/null && echo "telegram webhook released"'
+
+[Install]
+WantedBy=multi-user.target

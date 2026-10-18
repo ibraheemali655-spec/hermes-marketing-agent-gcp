@@ -1,0 +1,9 @@
+[Unit]
+Description=Hermes idle watchdog check
+After=network-online.target google-guest-agent.service
+
+[Service]
+Type=oneshot
+User=__VM_USER__
+ExecStart=/bin/bash __VM_HOME__/idle-watchdog.sh
+TimeoutStartSec=60

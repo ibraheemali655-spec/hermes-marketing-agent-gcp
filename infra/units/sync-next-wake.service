@@ -1,0 +1,11 @@
+[Unit]
+Description=Sync next-wake Cloud Scheduler from jobs.json
+After=network-online.target google-guest-agent.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=__VM_USER__
+Environment=PATH=__VM_HOME__/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/snap/bin
+ExecStart=/bin/bash __VM_HOME__/sync-next-wake.sh
+TimeoutStartSec=60

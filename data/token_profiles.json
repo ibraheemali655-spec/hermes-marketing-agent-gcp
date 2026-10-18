@@ -1,0 +1,9 @@
+{
+  "_note": "Illustrative token usage per run type, for comparing models. Replace with your own: Hermes records input/cache-read/output tokens per session in ~/.hermes/state.db (sessions table). Uncached input = input - cache_read.",
+  "runs_per_week": {"commentary": 1, "copy_post": 2, "skip": 0},
+  "profiles": {
+    "commentary": {"desc": "Thu: research the brief on the web, write 150-200 words, schedule via the browser", "input": 1500000, "cache_read": 1000000, "output": 8000},
+    "copy_post":  {"desc": "Tue/Sat: read the plan, type the copy, schedule via the browser", "input": 500000, "cache_read": 300000, "output": 4000},
+    "skip":       {"desc": "Entry already posted: read the plan, report, stop", "input": 50000, "cache_read": 0, "output": 500}
+  }
+}

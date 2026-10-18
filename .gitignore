@@ -1,0 +1,18 @@
+# Secrets and live state: never commit
+.env
+*.env
+infra/config.sh
+*-key.json
+*service-account*.json
+client_secret*.json
+auth.json
+.hermes/
+hermes-export/
+*.AppImage
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/

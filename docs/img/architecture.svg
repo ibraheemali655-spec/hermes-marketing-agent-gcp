@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" font-family="Inter, Calibri, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5c5c5c"/>
+    </marker>
+  </defs>
+  <rect width="960" height="560" fill="#ffffff"/>
+
+  <!-- triggers -->
+  <text x="30" y="34" font-weight="600" fill="#333333">Wake triggers</text>
+  <rect x="30" y="50" width="190" height="62" rx="8" fill="#f2f2f2" stroke="#8c8c8c"/>
+  <text x="125" y="76" text-anchor="middle" font-weight="600" fill="#333333">Telegram message</text>
+  <text x="125" y="96" text-anchor="middle" fill="#4d4d4d">owner chats with the agent</text>
+
+  <rect x="30" y="140" width="190" height="78" rx="8" fill="#f2f2f2" stroke="#8c8c8c"/>
+  <text x="125" y="164" text-anchor="middle" font-weight="600" fill="#333333">Cloud Scheduler</text>
+  <text x="125" y="183" text-anchor="middle" fill="#4d4d4d">hermes-next-wake</text>
+  <text x="125" y="202" text-anchor="middle" fill="#4d4d4d">8 min before next cron job</text>
+
+  <!-- waker -->
+  <rect x="290" y="88" width="200" height="92" rx="8" fill="#ebf3ec" stroke="#3A7D44"/>
+  <text x="390" y="114" text-anchor="middle" font-weight="600" fill="#2c5e34">Cloud Run: hermes-waker</text>
+  <text x="390" y="134" text-anchor="middle" fill="#4d4d4d">/telegram (secret token)</text>
+  <text x="390" y="152" text-anchor="middle" fill="#4d4d4d">/wake (scheduler token)</text>
+  <text x="390" y="170" text-anchor="middle" fill="#737373">scales to zero, ~$0</text>
+
+  <rect x="290" y="210" width="200" height="44" rx="8" fill="#fafafa" stroke="#a6a6a6"/>
+  <text x="390" y="237" text-anchor="middle" fill="#4d4d4d">Secret Manager: bot token</text>
+  <line x1="390" y1="210" x2="390" y2="182" stroke="#a6a6a6" stroke-dasharray="4 3"/>
+
+  <line x1="220" y1="81" x2="288" y2="115" stroke="#5c5c5c" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="220" y1="179" x2="288" y2="152" stroke="#5c5c5c" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- VM -->
+  <rect x="560" y="20" width="380" height="370" rx="10" fill="#fff6ec" stroke="#F68E1E" stroke-width="1.5"/>
+  <text x="750" y="44" text-anchor="middle" font-weight="600" fill="#333333">hermes-vm · e2-custom 6 vCPU / 20 GB</text>
+  <text x="750" y="62" text-anchor="middle" fill="#b4620f">stopped when idle: you pay for the 60 GB disk only</text>
+
+  <line x1="490" y1="134" x2="558" y2="134" stroke="#5c5c5c" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="524" y="124" text-anchor="middle" fill="#4d4d4d">start</text>
+
+  <rect x="580" y="76" width="340" height="66" rx="7" fill="#ffffff" stroke="#F68E1E"/>
+  <text x="750" y="98" text-anchor="middle" font-weight="600" fill="#333333">Hermes gateway: implementer</text>
+  <text x="750" y="117" text-anchor="middle" fill="#4d4d4d">Telegram long-poll · cron jobs · skills · memory</text>
+  <text x="750" y="134" text-anchor="middle" fill="#4d4d4d">model: DeepSeek V4 Flash via OpenRouter</text>
+
+  <rect x="580" y="152" width="340" height="50" rx="7" fill="#ffffff" stroke="#F68E1E"/>
+  <text x="750" y="173" text-anchor="middle" font-weight="600" fill="#333333">Chrome, logged in · CDP on 127.0.0.1:9222</text>
+  <text x="750" y="191" text-anchor="middle" fill="#4d4d4d">systemd service, dedicated profile, loopback only</text>
+
+  <rect x="580" y="212" width="340" height="50" rx="7" fill="#ffffff" stroke="#F68E1E"/>
+  <text x="750" y="233" text-anchor="middle" font-weight="600" fill="#333333">Claude Code: boss</text>
+  <text x="750" y="251" text-anchor="middle" fill="#4d4d4d">plans, writes handoffs and skills, reviews</text>
+
+  <rect x="580" y="272" width="164" height="50" rx="7" fill="#ffffff" stroke="#F68E1E"/>
+  <text x="662" y="293" text-anchor="middle" font-weight="600" fill="#333333">idle-watchdog</text>
+  <text x="662" y="311" text-anchor="middle" fill="#4d4d4d">30 min idle → stop</text>
+
+  <rect x="756" y="272" width="164" height="50" rx="7" fill="#ffffff" stroke="#F68E1E"/>
+  <text x="838" y="293" text-anchor="middle" font-weight="600" fill="#333333">sync-next-wake</text>
+  <text x="838" y="311" text-anchor="middle" fill="#4d4d4d">jobs.json → Scheduler</text>
+
+  <rect x="580" y="332" width="340" height="44" rx="7" fill="#ffffff" stroke="#F68E1E"/>
+  <text x="750" y="359" text-anchor="middle" fill="#4d4d4d" font-size="12">GNOME desktop over Chrome Remote Desktop · VS Code</text>
+
+  <!-- feedback loop: sync-next-wake rewrites scheduler -->
+  <path d="M920,297 L950,297 L950,420 L125,420 L125,220" fill="none" stroke="#F68E1E" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#a)"/>
+  <text x="480" y="412" text-anchor="middle" fill="#b4620f">rewritten whenever jobs change and before every shutdown</text>
+
+  <!-- outside world -->
+  <rect x="30" y="460" width="240" height="70" rx="8" fill="#fafafa" stroke="#a6a6a6"/>
+  <text x="150" y="486" text-anchor="middle" font-weight="600" fill="#333333">Operator laptop</text>
+  <text x="150" y="505" text-anchor="middle" fill="#4d4d4d">SSH through IAP only (no port 22)</text>
+  <text x="150" y="522" text-anchor="middle" fill="#4d4d4d">ssh -L 9119 / 9222 for dashboard, CDP</text>
+
+  <rect x="350" y="460" width="230" height="70" rx="8" fill="#fafafa" stroke="#a6a6a6"/>
+  <text x="465" y="486" text-anchor="middle" font-weight="600" fill="#333333">OpenRouter</text>
+  <text x="465" y="505" text-anchor="middle" fill="#4d4d4d">DeepSeek V4 Flash, fallbacks</text>
+  <text x="465" y="522" text-anchor="middle" fill="#4d4d4d">$0.091 / $0.182 per M tokens</text>
+
+  <rect x="660" y="460" width="270" height="70" rx="8" fill="#fafafa" stroke="#a6a6a6"/>
+  <text x="795" y="486" text-anchor="middle" font-weight="600" fill="#333333">LinkedIn company page</text>
+  <text x="795" y="505" text-anchor="middle" fill="#4d4d4d">posts scheduled through the browser</text>
+  <text x="795" y="522" text-anchor="middle" fill="#4d4d4d">(no page-admin API exists)</text>
+
+  <line x1="270" y1="480" x2="578" y2="370" stroke="#5c5c5c" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#a)"/>
+  <line x1="600" y1="390" x2="510" y2="458" stroke="#5c5c5c" stroke-width="1.2" marker-end="url(#a)"/>
+  <line x1="795" y1="390" x2="795" y2="458" stroke="#5c5c5c" stroke-width="1.2" marker-end="url(#a)"/>
+</svg>

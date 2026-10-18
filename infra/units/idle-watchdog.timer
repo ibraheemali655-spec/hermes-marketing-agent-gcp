@@ -1,0 +1,11 @@
+[Unit]
+Description=Hermes idle watchdog (every 5 min)
+After=network-online.target google-guest-agent.service
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=5min
+AccuracySec=30s
+
+[Install]
+WantedBy=timers.target

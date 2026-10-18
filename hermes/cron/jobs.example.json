@@ -1,0 +1,56 @@
+{
+  "jobs": [
+    {
+      "id": "tue-campaign-post",
+      "name": "Campaign: Tuesday campaign post",
+      "skill": "campaign-cmo",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 2"
+      },
+      "enabled": true,
+      "deliver": "telegram",
+      "enabled_toolsets": [
+        "browser",
+        "file",
+        "terminal"
+      ],
+      "prompt": "You are executing the Tuesday LinkedIn campaign post for the company's 10-week LinkedIn campaign.\n\n=== CONTEXT ===\n- LinkedIn Company Page admin: linkedin.com/company/<PAGE_ID>/admin/\n- The browser profile behind CDP is already logged in as a page admin\n- Chrome CDP is available at 127.0.0.1:9222 — start by checking if it's reachable\n- Master plan file: ~/campaign/master-plan.md\n- Image assets directory: ~/campaign/images/\n\n=== YOUR TASK ===\n\n1. Read the master plan file (read_file tool). Find the Tuesday entry matching today's date. Tuesday entries have headers like \"TUE May 19\", \"TUE May 26\", etc.\n\n2. Check if the entry says \"[ALREADY POSTED NO ACTION NEEDED]\" — if so, skip and confirm \"Tuesday [date]: Already scheduled, no action needed ✅\"\n\n3. Extract the exact pre-written copy and the image reference (if any):\n   - Copy is under the \"Copy:\" section or after the header\n   - Image path is noted in the entry (e.g., \"build_social.png\")\n   - Some Wave 2 entries say \"ALL IMAGES WILL BE UPLOADED MANUALLY\"\n   - Wave 3 entries (July 8, 15, 22) have NO image — text only\n\n4. Schedule the post text on LinkedIn:\n   a. Navigate to linkedin.com/company/<PAGE_ID>/admin/page-posts/published/\n   b. Click \"Start a post\" button\n   c. Click the textbox and type the full post content exactly as written\n   d. Click \"Schedule post\" — date defaults to today (Tuesday)\n   e. Click \"Next\" then \"Schedule\"\n   \n   ⚠️ LinkedIn limitations:\n   - Time picker CANNOT be changed — accept default time\n   - Image upload is NOT possible via automation at all\n\n5. After scheduling, check if the post requires an image:\n   - If image is specified AND exists at the asset directory → flag: \"📷 Image needs manual upload: [filename] from [path]\"\n   - If no image reference → no action needed\n\n6. Deliver confirmation:\n   \"Posted: Tue [Date] — [Post title] ✅\n   [If image needed: 📷 Image to attach: [filename]]\"\n\nIMPORTANT: If today's date doesn't match any Tuesday entry (campaign ends July 25), skip. If marked \"[ALREADY POSTED]\", skip."
+    },
+    {
+      "id": "thu-industry-commentary",
+      "name": "Campaign: Thursday industry commentary",
+      "skill": "campaign-cmo",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 4"
+      },
+      "enabled": true,
+      "deliver": "telegram",
+      "enabled_toolsets": [
+        "web",
+        "browser",
+        "file",
+        "terminal"
+      ],
+      "prompt": "You are executing the Thursday LinkedIn industry commentary post for the company's 10-week LinkedIn campaign.\n\n=== CONTEXT ===\n- LinkedIn Company Page admin: linkedin.com/company/<PAGE_ID>/admin/\n- The browser profile behind CDP is already logged in as a page admin\n- Chrome CDP is available at 127.0.0.1:9222 — start by checking if it's reachable\n- Master plan file: ~/campaign/master-plan.md\n\n=== YOUR TASK ===\n\n1. Read the master plan file (read_file tool). Find the Thursday entry matching today's date. Thursday entries have headers like \"THU May 21\", \"THU May 28\", etc. Look for the Hermes brief section which contains the research topic and hashtags.\n\n2. Extract the research brief — the topic, what to look for, the company-angle requirements, and the hashtags.\n\n3. Research the topic using web browser or curl. Find 1 real, concrete data point, announcement, or news story from 2025-2026. If the topic is region-specific, prioritize local sources.\n\n4. Write 150–200 words following this structure:\n   - Opening insight or data point (the research finding)\n   - Company angle (what this means for CIOs/business leaders)\n   - One closing question to drive comments\n   - End with the exact hashtags from the master plan\n\n5. Schedule the post on LinkedIn:\n   a. Navigate to linkedin.com/company/<PAGE_ID>/admin/page-posts/published/\n   b. Click \"Start a post\" button\n   c. Click the textbox and type the full post content (text + hashtags)\n   d. Click \"Schedule post\" (NOT \"Post\")\n   e. The date defaults to today — confirm it shows today's date\n   f. Click \"Next\" then \"Schedule\"\n   \n   ⚠️ LinkedIn limitations:\n   - Time picker CANNOT be changed via automation — accept the default time\n   - Image upload is NOT possible — this post doesn't need one\n   - If LinkedIn session expired and login required: skip posting, deliver the post text in your confirmation so the user can post manually\n\n6. Deliver a confirmation message with the format:\n   \"Posted: [Day] [Date] — [Topic] ✅\n   [First line of post or key point]\"\n\nIMPORTANT: If today's date doesn't match any Thursday entry in the master plan (campaign ends July 25), skip with \"No Thursday post scheduled for today.\""
+    },
+    {
+      "id": "sat-educational-post",
+      "name": "Campaign: Saturday educational post",
+      "skill": "campaign-cmo",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 6"
+      },
+      "enabled": true,
+      "deliver": "telegram",
+      "enabled_toolsets": [
+        "browser",
+        "file",
+        "terminal"
+      ],
+      "prompt": "You are executing the Saturday LinkedIn educational post for the company's 10-week LinkedIn campaign.\n\n=== CONTEXT ===\n- LinkedIn Company Page admin: linkedin.com/company/<PAGE_ID>/admin/\n- The browser profile behind CDP is already logged in as a page admin\n- Chrome CDP is available at 127.0.0.1:9222 — start by checking if it's reachable\n- Master plan file: ~/campaign/master-plan.md\n\n=== YOUR TASK ===\n\n1. Read the master plan file (read_file tool). Find the Saturday entry matching today's date. Saturday entries have headers like \"SAT May 23\", \"SAT May 30\", etc. The educational post copy is pre-written under the \"Copy:\" heading or in a code block after the header.\n\n2. Extract the exact pre-written post copy — text, link, and hashtags. Post it EXACTLY as written — no edits, no additions, no changes.\n\n3. Schedule the post on LinkedIn:\n   a. Navigate to linkedin.com/company/<PAGE_ID>/admin/page-posts/published/\n   b. Click \"Start a post\" button\n   c. Click the textbox and type the full post content exactly as written\n   d. Click \"Schedule post\" (NOT \"Post\")\n   e. Confirm the date defaults to today (Saturday)\n   f. Click \"Next\" then \"Schedule\"\n   \n   ⚠️ LinkedIn limitations:\n   - Time picker CANNOT be changed via automation — accept default time\n   - No image needed for Saturday posts\n   - If LinkedIn session expired: skip, deliver the post text in your confirmation\n\n4. Deliver confirmation:\n   \"Posted: [Day] [Date] — [Post title/theme] ✅\"\n\nIMPORTANT: If today's date doesn't match any Saturday entry (campaign ends July 25), skip with \"No Saturday post scheduled for today.\""
+    }
+  ]
+}

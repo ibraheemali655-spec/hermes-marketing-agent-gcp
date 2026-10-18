@@ -1,0 +1,15 @@
+[project]
+name = "hermes-marketing-agent-gcp"
+version = "1.0.0"
+description = "A marketing agent on a GCP VM that sleeps when idle and wakes for its schedule"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "flask>=3", "requests>=2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools]
+packages = ["hermes_gcp"]

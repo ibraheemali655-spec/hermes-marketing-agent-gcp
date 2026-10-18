@@ -1,0 +1,20 @@
+{
+  "_note": "List prices. GCP: on-demand us-west1, check the pricing calculator before relying on them. LLM: OpenRouter /api/v1/models, fetched 2026-10-18, USD per million tokens.",
+  "gcp": {
+    "e2_vcpu_hour": 0.021811,
+    "e2_gb_ram_hour": 0.002923,
+    "external_ipv4_hour": 0.005,
+    "pd_balanced_gb_month": 0.10,
+    "vm_vcpus": 6,
+    "vm_ram_gb": 20,
+    "disk_gb": 60,
+    "serverless_month": 0.0,
+    "_serverless": "Cloud Run waker (scales to zero), one Cloud Scheduler job and one secret all fit in the free tiers at this volume."
+  },
+  "llm_per_mtok": {
+    "deepseek/deepseek-v4-flash": {"input": 0.091, "cache_read": 0.0182, "output": 0.182},
+    "anthropic/claude-haiku-4.5":  {"input": 1.0,   "cache_read": 0.10,   "output": 5.0},
+    "anthropic/claude-sonnet-5.5": {"input": 2.0,   "cache_read": 0.10,   "output": 10.0},
+    "anthropic/claude-opus-5.5":   {"input": 4.0,   "cache_read": 0.20,   "output": 20.0}
+  }
+}

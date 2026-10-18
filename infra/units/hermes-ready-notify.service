@@ -1,0 +1,15 @@
+[Unit]
+# Pings Telegram once the Hermes gateway is up after a wake, so the owner knows
+# when to (re)send. Fires on every boot (Telegram-wake and cron-wake alike).
+Description=Notify Telegram when the Hermes gateway is up
+After=hermes-gateway.service hermes-webhook-release.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=__VM_USER__
+ExecStart=__VM_HOME__/hermes-ready-notify.sh
+TimeoutStartSec=220
+
+[Install]
+WantedBy=multi-user.target

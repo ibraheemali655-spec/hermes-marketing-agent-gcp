@@ -1,0 +1,9 @@
+[Unit]
+Description=Sync next-wake Cloud Scheduler when Hermes cron jobs change
+
+[Path]
+PathModified=__VM_HOME__/.hermes/cron/jobs.json
+Unit=sync-next-wake.service
+
+[Install]
+WantedBy=multi-user.target
