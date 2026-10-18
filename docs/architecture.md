@@ -1,6 +1,6 @@
 # Architecture
 
-![Architecture](img/architecture.svg)
+![Architecture](img/architecture-diagram.svg)
 
 One GCP VM runs everything the agent needs: the Hermes gateway, a logged-in Chrome,
 a remote desktop, and Claude Code. The VM is **off by default**. Two things turn it on,

@@ -14,7 +14,7 @@ that shows why it's built this way.
 
 **[Watch the 10-second clip](https://github.com/ibraheemali655-spec/hermes-marketing-agent-gcp/releases/download/v1.0/hermes-wake-demo.mp4)**: a stopped VM, a Telegram message, the agent at work, then an idle hour and a shutdown, all recorded on the production setup.
 
-![Architecture](docs/img/architecture.svg)
+![Architecture](docs/img/architecture-diagram.svg)
 
 ## The problem
 
