@@ -49,8 +49,10 @@ Known limits; don't spend turns fighting them:
 
 ## Browser or API?
 
-APIs first. The browser is for things that have no API (LinkedIn page admin, partner
-marketing portals). Stop after three failed browser attempts at the same step and report
+APIs first. Post through the LinkedIn API once the app is approved for organization posting
+(`w_organization_social`). It also takes images and exact schedule times, which removes the two
+browser limits above. Until then, and for page settings and partner marketing portals, which
+have no API, use the browser. Stop after three failed browser attempts at the same step and report
 back. On SPAs whose accessibility tree is empty, a screenshot read by the vision model
 beats blind clicking, and `Runtime.evaluate` beats `browser_click`.
 

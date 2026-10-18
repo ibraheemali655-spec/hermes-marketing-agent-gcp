@@ -18,10 +18,13 @@ same input/output mix.
 **Cold start is about 60 seconds.** A Telegram message to a sleeping VM wakes it, but that
 message isn't processed. The waker asks you to resend it once the "ready" ping arrives.
 
-**One posting time.** LinkedIn's scheduling time picker can't be driven by automation, so
-posts land at the default time LinkedIn offers. The date is right.
+**One posting time, via the browser.** LinkedIn's scheduling time picker can't be driven by
+automation, so browser-scheduled posts land at the default time LinkedIn offers. The date is
+right. Posting through the LinkedIn API, once the app is approved for organization posting,
+sets exact times.
 
-**Images are attached by a human.** Same reason: the OS file picker.
+**Images are attached by a human, via the browser.** The upload opens the OS file picker. The
+API route takes images directly.
 
 **Session expiry is a manual step.** The agent won't enter passwords. Re-login is
 `hermes-chrome-relogin` from the remote desktop.

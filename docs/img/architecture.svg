@@ -81,7 +81,7 @@
   <rect x="660" y="460" width="270" height="70" rx="8" fill="#fafafa" stroke="#a6a6a6"/>
   <text x="795" y="486" text-anchor="middle" font-weight="600" fill="#333333">LinkedIn company page</text>
   <text x="795" y="505" text-anchor="middle" fill="#4d4d4d">posts scheduled through the browser</text>
-  <text x="795" y="522" text-anchor="middle" fill="#4d4d4d">(no page-admin API exists)</text>
+  <text x="795" y="522" text-anchor="middle" fill="#4d4d4d">(API needs app approval first)</text>
 
   <line x1="270" y1="480" x2="578" y2="370" stroke="#5c5c5c" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#a)"/>
   <line x1="600" y1="390" x2="510" y2="458" stroke="#5c5c5c" stroke-width="1.2" marker-end="url(#a)"/>

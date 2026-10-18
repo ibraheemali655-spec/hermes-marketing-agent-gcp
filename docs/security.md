@@ -1,7 +1,9 @@
 # Security: a full browser, without exposing it
 
-The agent needs a real, logged-in Chrome: LinkedIn has no API for company-page admin, and
-neither do most partner marketing portals. A logged-in browser is a powerful credential, so
+The agent needs a real, logged-in Chrome. LinkedIn's API can post to a company page, but only
+once LinkedIn approves the app for organization posting (`w_organization_social`); until then,
+and for page settings, which no API covers, the browser is the only way in. Most partner
+marketing portals have no API at all. A logged-in browser is a powerful credential, so
 the design keeps it reachable by the agent and by nobody else.
 
 ## The browser

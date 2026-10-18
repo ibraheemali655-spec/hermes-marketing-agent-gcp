@@ -24,7 +24,8 @@ that shows why it's built this way.
   morning, the post **silently didn't go out**: Hermes skips a missed run after a 2-hour grace
   and never catches up. That happened on 30 May.
 - Keeping a 6 vCPU / 20 GB machine on all month for three short jobs a week costs ~$148/month.
-- The agent needs a full, logged-in browser (LinkedIn has no page-admin API), which is a
+- The agent needs a full, logged-in browser (LinkedIn's company-page posting API needs app
+  approval first, and page settings have no API at all), which is a
   serious credential to leave on an internet-facing machine.
 
 ## What I built
